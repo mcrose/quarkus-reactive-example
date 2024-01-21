@@ -1,0 +1,40 @@
+services:
+
+   db:
+      container_name: countrydb-postgres
+      image: postgres:15.2-alpine
+      environment:
+         POSTGRES_USER: reactiveuser
+         POSTGRES_PASSWORD: reactivepass
+         POSTGRES_DB: reactivedb
+         
+         POSTGRES_HOST_AUTH_METHOD: trust
+                                    #password
+      ports:
+      - 5432:5432
+#      volumes:
+#      - ./db-postgres/db:/var/lib/postgresql/data
+#      - ./db-postgres/import:/import
+      networks:
+      - postgres
+      restart: unless-stopped
+
+# https://github.com/khezen/compose-postgres/blob/master/docker-compose.yml
+   pgadmin:
+      container_name: countrydb-pgadmin
+      image: dpage/pgadmin4:7.4
+      environment:
+         PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+         PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+         PGADMIN_CONFIG_SERVER_MODE: False
+      volumes:
+      - ./db-postgres/pgadmin:/root/.pgadmin
+      ports:
+      - 8090:80
+      networks:
+      - postgres
+      restart: unless-stopped
+
+networks:
+   postgres:
+      driver: bridge
