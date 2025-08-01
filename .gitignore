@@ -25,3 +25,6 @@ replay_pid*
 /target/
 /.classpath
 /.project
+/db-postgres/
+/uber-jar-create.bat
+/uber-jar-run-profile_dev.bat
