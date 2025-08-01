@@ -1,8 +1,5 @@
-/*
- * Copyright (C)2023-2025 Skytel MTEL.
- * All rights reserved
- *
- * SkyHealth v2.0
+/**
+ * @author Betto McRose [icarus] / icarusdb@gmail.com
  */
 package py.com.icarusdb.reactiveexample;
 
